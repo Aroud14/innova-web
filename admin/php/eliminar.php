@@ -1,8 +1,9 @@
 <?php
 @session_start();
 $autentificado_sis = $_SESSION['autentificado_sis'];
-$datos_sis = $_SESSION['datos_sis'];
-$nombre_usuario  = $_SESSION['nombre'];
+$datos_sis         = $_SESSION['datos_sis'];
+$nombre_usuario    = $datos_sis['nombre'];
+
 require ("clase_variables.php");
 require ("clase_mysql.php");
 require ("clase_funciones.php");
