@@ -8,7 +8,7 @@ class Variables {
 	public function opcion($opc){
 		switch($opc){
 			case 1:
-				$this->BaseDatos = "base";
+				$this->BaseDatos = "innova_web";
 				$this->Servidor = "localhost";
 				$this->Usuario = "root";
 				$this->Clave = "";
