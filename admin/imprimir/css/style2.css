@@ -1,0 +1,187 @@
+@font-face {
+  font-family: SourceSansPro;
+  src: url(SourceSansPro-Regular.ttf);
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+a {
+  color: #0087C3;
+  text-decoration: none;
+}
+
+body {
+   background:url('../img/membrete.jpeg') no-repeat !important;
+   background-image-resolution:300dpi !important;
+   background-image-resize:6 !important;
+   font-family:"SourceSansPro"!important;
+
+  /*position: relative;
+  width: 21cm;  
+  height: 29.7cm; 
+  margin: 0 auto; 
+  color: #555555;
+  background: #FFFFFF; 
+  font-family: Arial, sans-serif; 
+  font-size: 14px; 
+  font-family: SourceSansPro;*/
+}
+
+header {
+  padding: 10px 0;
+  margin-bottom: 20px;
+ /* border-bottom: 1px solid #AAAAAA;*/
+}
+#logo {
+/*background: url('../img/logo.png');*/
+background-repeat: no-repeat;
+background-size: 90px 90px;
+  /*float: left;
+  margin-top: 8px;*/
+}
+
+#logo img{
+  height: 20px !important;
+}
+
+#firma {
+  text-align: center !important;
+   bottom: 0 !important;
+   float: bottom;
+  position: absolute !important;
+
+}
+
+#firma-remi{
+  font-weight: bold;
+  font-size: 18px;
+}
+#border-top-firma{
+ 
+}
+
+#company {
+  float: right;
+  text-align: right;
+}
+
+
+#details {
+  margin-bottom: 50px;
+}
+
+#client {
+  padding-left: 6px;
+  border-left: 6px solid #00547B;
+  float: left;
+}
+
+#client .to {
+  color: #777777;
+}
+.fecha{
+   font-size: 20px !important;
+}
+h2.name {
+  font-size: 1.4em;
+  font-weight: normal;
+  margin: 0;
+}
+
+#invoice {
+  float: right;
+  text-align: right;
+}
+
+#invoice h1 {
+  color: #0087C3;
+  font-size: 2.4em;
+  line-height: 1em;
+  font-weight: normal;
+  margin: 0  0 10px 0;
+}
+
+#invoice .date {
+  font-size: 1.1em;
+  color: #777777;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 20px;
+}
+
+table th,
+table td {
+  padding: 20px;
+    text-align: center;
+    border: 1px solid #aaaaaa;
+}
+
+table th {
+  white-space: nowrap;        
+  font-weight: normal;
+}
+
+table td {
+  text-align: right;
+}
+
+table td h3{
+  color: #57B223;
+  font-size: 1.2em;
+  font-weight: normal;
+  margin: 0 0 0.2em 0;
+}
+
+table .desc {
+  text-align: left;
+}
+
+
+
+#thanks{
+  font-size: 2em;
+  margin-bottom: 50px;
+}
+
+#notices{
+  padding-left: 6px;
+  border-left: 6px solid #0087C3;  
+}
+
+#notices .notice {
+  font-size: 1.2em;
+}
+#firma-img{
+  margin-top: -1em;
+  position: absolute;
+  float: center;  
+}
+
+footer {
+  width: 85%;
+  height: 270px;
+  position: absolute;
+  bottom: 0;
+  padding: 8px 0;
+  text-align: center;
+}
+
+/*footer {
+  color: #777777;
+  width: 85%;
+  height: 30px;
+  position: absolute;
+  bottom: 0;
+  border-top: 1px solid #AAAAAA;
+  padding: 8px 0;
+  text-align: center;
+}*/
+
