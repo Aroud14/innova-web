@@ -12,7 +12,7 @@
                     foreach($resultados as $resultado)
                     {
                 ?>
-                            <div class="swiper-slide" data-slide-bg="<?= $resultado->archivo ?>" style="background-position: 80% center">
+                            <div class="swiper-slide" data-slide-bg="admin/archivos/<?= $resultado->archivo ?>" style="background-position: 80% center">
                                 <div class="swiper-slide-caption section-70">
                                     <div class="container">
                                         <div class="range range-xs-center">
