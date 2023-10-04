@@ -1,16 +1,29 @@
+<?php
+    $datosEmpresa = $conexion->fetch_array($querys->getDatosEmpresa());
+?>
+
 <header class="page-head">
     <div class="rd-navbar-wrap">
         <nav class="rd-navbar novi-background rd-navbar-center" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="220px" data-xl-stick-up-offset="220px" data-xxl-stick-up-offset="220px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
             <div class="rd-navbar-inner">
-                <div class="rd-navbar-panel"><button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar, .rd-navbar-nav-wrap"><span></span></button>
-                    <h4 class="panel-title">Patshala</h4><button class="rd-navbar-top-panel-toggle" data-rd-navbar-toggle=".rd-navbar-top-panel"><span></span></button>
+                <div class="rd-navbar-panel">
+                    <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar, .rd-navbar-nav-wrap"><span></span></button>
+                    <h4 class="panel-title">Patshala</h4>
+                        <button class="rd-navbar-top-panel-toggle" data-rd-navbar-toggle=".rd-navbar-top-panel"><span></span>
+                    </button>
                     <div class="rd-navbar-top-panel">
                         <div class="shell">
                             <div class="range range-10 range-md-center range-md-middle range-lg-around">
                                 <div class="cell-md-3">
                                     <div class="unit unit-horizontal unit-top unit-spacing-xs">
                                         <div class="unit-left"><span class="icon novi-icon mdi mdi-phone text-middle"></span></div>
-                                        <div class="unit-body"><a class="reveal-block" href="tel:#">1-800-1234-567,</a><a href="tel:#">1-800-6547-321</a></div>
+                                        <div class="unit-body">
+                                            <?php 
+                                                echo $datos['nombre'] == "" ? "" : "";
+                                            ?>
+                                            <a class="reveal-block" href="tel:#">1-800-1234-567,</a>
+                                            <a href="tel:#">1-800-6547-321</a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="cell-md-3 text-center">

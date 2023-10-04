@@ -5,8 +5,6 @@
 <?php
     $resultados = $conexion->obtenerlista($querys->getSliders());
 ?>
-
-
     <section class="section">
         <div class="swiper-container swiper-slider swiper-slider-modern swiper-slider-2" data-loop="true" data-dragable="false" data-slide-effect="fade">
             <div class="swiper-wrapper">
@@ -54,6 +52,7 @@
         </div>
     </section>
 
+    
 
 
 

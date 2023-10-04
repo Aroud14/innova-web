@@ -7,5 +7,12 @@ class Querys {
 		return $strQuery;
 	}
 	//---------------------------FIN SLIDERS-------------------------------
+
+	//---------------------------INICIO DATOS DE LA EMPRESA-----------------------------  
+	function getDatosEmpresa(){
+		$strQuery = "SELECT * FROM tblc_configuracion WHERE id_configuracion = 1";
+		return $strQuery;
+	}
+	//---------------------------FIN DATOS DE LA EMPRESA-------------------------------
 }
 ?>
