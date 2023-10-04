@@ -90,7 +90,7 @@
                                         <li><a href="news-post-page.html">News Post Page</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="contacts.html">Contacts</a></li>
+                                <li><a href="contactanos.php">Contactanos</a></li>
                             </ul>
                         </div>
                     </div>

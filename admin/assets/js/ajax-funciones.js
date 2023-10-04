@@ -465,11 +465,27 @@ function registro_proyecto(id = '-1'){
     });
 }
 
-
-
-
 ////////// FIN CATÁLOGOS
 
+
+//MENSAJES DE PAGINA WEB
+function lista_mensajes_web(pagina=0){
+    url    = 'pg/mensajes_web_lista.php';
+    if(pagina != 0) $("#pagina").val(pagina);
+    var params = $('#form_busqueda').serialize();
+
+    $.ajax({
+        beforeSend: function(){
+            $("#contenido").html("<center><img src='img/spinner.svg' /><br>Cargando ...</center>");
+        },
+        type:    "post",
+        url:     url,
+        data:    params,
+        success: function(data){
+            $("#contenido").html(data);
+        }
+    });
+}
 
 
 

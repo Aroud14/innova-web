@@ -819,7 +819,37 @@ class Querys {
 	}
 	//---------------------------TABLA FIN CLIENTE-----------------------------
 
+	
+	//---------------------------TABLA PERMISOS-----------------------------  
 
+	public function getMensajes($nombre, $apellido, $correo, $telefono, $inicio, $limite)
+	{
+		$sentencia = ($nombre != '') ? " AND nombre LIKE '%".$nombre."%'" : '';
+		$sentencia .= ($apellido != '') ? " AND apellido LIKE '%".$apellido."%'" : '';
+		$sentencia .= ($correo != '') ? " AND correo LIKE '%".$correo."%'" : '';
+		$sentencia .= ($telefono != '') ? " AND telefono LIKE '%".$telefono."%'" : '';
+
+		$strQuery = 'SELECT * FROM tblc_mensajes_web';
+		$strQuery .= ' WHERE fecha_eliminado IS NULL'.$sentencia;
+		$strQuery .= ' ORDER BY nombre ASC LIMIT ';
+		$strQuery .= $inicio.",".$limite;
+
+		return $strQuery;
+	}
+
+	public function getConteoMensajes($nombre, $apellido, $correo, $telefono)
+	{
+		$sentencia = ($nombre != '') ? " AND nombre LIKE '%".$nombre."%'" : '';
+		$sentencia .= ($apellido != '') ? " AND apellido LIKE '%".$apellido."%'" : '';
+		$sentencia .= ($correo != '') ? " AND correo LIKE '%".$correo."%'" : '';
+		$sentencia .= ($telefono != '') ? " AND telefono LIKE '%".$telefono."%'" : '';
+
+		$strQuery = "SELECT COUNT(*) FROM tblc_mensajes_web WHERE fecha_eliminado IS NULL".$sentencia;
+
+		return $strQuery;
+	}
+
+	//------------------------- FIN PERMISOS ---------------------------
 }
 
 ?>

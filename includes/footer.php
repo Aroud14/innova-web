@@ -20,12 +20,6 @@
                             ?>
                         </a>
                         <div class="offset-top-30 text-center">
-                            <?php
-                                if($datosEmpresa["instagram"] != "" && $datosEmpresa["facebook"] != "" && $datosEmpresa["whatsapp"] != "" && $datosEmpresa["telefono"] != "" && $datosEmpresa["correo"] != "")
-                                {
-                                }
-                            ?>
-
                             <ul class="list-inline list-inline-xs list-inline-madison">
                                 <?= $datosEmpresa["instagram"] != "" ? '<li><a class="icon novi-icon icon-xxs fa-instagram icon-circle icon-gray-light-filled" target="_blank" href="'.$datosEmpresa["instagram"].'"></a></li>' : ''  ?>
 
