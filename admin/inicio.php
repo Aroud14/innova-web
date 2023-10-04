@@ -7,15 +7,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <meta name="description" content="Sistema clinica la rosa">
+    <meta name="description" content="Sistema E&D">
     <meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern,  html5, responsive">
     <meta name="author" content="Desarrollos Inteligentes">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <title>Plantilla</title>
+    <title>E&D | ADMIN</title>
     
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="archivos/configuracion/imagenes/17381687_21082023_1220.png">
     
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -131,10 +131,6 @@
     <script src="assets/js/scriptsGoogleMaps.js"></script>
     <script src="assets/js/funciones.js"></script>
     <script src="assets/js/ajax-funciones.js"></script>
-
-    <!-- MASCARAS -->
-    <script src="assets/js/cleave.min.js"></script>
-    <script src="assets/js/cleave-phone.mx.js"></script>
 
     <!-- CKEDITOR -->
     <script src="assets/ckeditor5/ckeditor_super_build.js"></script>

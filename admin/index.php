@@ -1,4 +1,4 @@
-<?php 
+<?php
     $siteKey = "6Lce7pUUAAAAAKINNN5uLt89_8HEmYib5NEzJZ6S";
     $lang = "es";
 ?>
@@ -14,7 +14,7 @@
         <title>Inicio de Sesión</title>
         
         <!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+        <link rel="shortcut icon" type="image/x-icon" href="archivos/configuracion/imagenes/17381687_21082023_1220.png">
         
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -37,7 +37,7 @@
                         <form target="frame_enviar" method="post" action="php/inicio_sesion.php" enctype="multipart/form-data" id="login_session_m">
                             <div class="login-userset">
                                 <div class="login-logo">
-                                    <img src="assets/img/logo.png" alt="img">
+                                    <img src="archivos/configuracion/imagenes/17381687_21082023_1220.png" alt="img">
                                 </div>
                                 <div class="login-userheading">
                                     <h3>Inicio de Sesión</h3>

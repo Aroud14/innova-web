@@ -3,6 +3,7 @@
 	$autentificado_sis = $_SESSION['autentificado_sis'];
 	$datos_sis = $_SESSION['datos_sis'];
 
+
 	require ("../php/clase_variables.php");
 	require ("../php/clase_mysql.php");
 	require ("../php/clase_funciones.php");

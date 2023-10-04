@@ -214,7 +214,7 @@ function modal_usuario_horario_registro(id=0, id2=0){
 // FIN DE USUARIOS
 
 ////////// INICIO CONFIGURACION
-function configuracion_registro(id = 1){
+function registro_configuracion(id = 1){
     url    = 'pg/configuracion_registro.php';  
     params = {'id': id}; 
     $.ajax({
@@ -226,10 +226,9 @@ function configuracion_registro(id = 1){
         data:    params,
         success: function(data){            
             $("#contenido").html(data);
-            useCkeditor5();
-            enviar_formulario();
+            $("#contenido").trigger('create');
             activarTooltipAjax()
-            ejecutarTransisionEntrada(190);
+            enviar_formulario();
         }
     });
 }
@@ -283,89 +282,191 @@ function marcar_permiso(idpa, check){
 }
 // FIN PERMISOS
 
+// INICIO BLOG
 
+function lista_blog(pagina=0){
+    url    = 'pg/blog_lista.php';
+    if(pagina != 0) $("#pagina").val(pagina);
+    var params = $('#form_busqueda').serialize();
 
-// INICIO ESTADOS
-function registro_estado(id = '-1'){
-    url    = 'pg/estado_registro.php';  
-    params = {'id': id}; 
+    $('#titulo').html("Blog");
+    $('#boton-registro').show();
+    $('#boton-regresar').hide();
+    $('#mostrar-busqueda').show();
 
     $.ajax({
         beforeSend: function(){
-            $("#formulario-registro").html(cargando);
+            $("#contenido").html("<center><img src='img/spinner.svg' /><br>Cargando ...</center>");
         },
         type:    "post",
         url:     url,
         data:    params,
-        success: function(data){            
-            $("#formulario-registro").html(data);
-            $("#formulario-registro").trigger('create');
+        success: function(data){
+            $("#contenido").html(data);
+        }
+    });
+}
+
+function registro_blog(id = '-1'){
+    url    = 'pg/blog_registro.php';
+    params = {'id': id};
+
+    if(id > 0) $('#breadcrumb-titulo').html("Editar Blog");
+
+    if(id <= 0) $('#breadcrumb-titulo').html("Registrar Blog");
+
+    $('#boton-registro').hide();
+    $('#boton-regresar').show();
+    $('#mostrar-busqueda').hide();
+
+    $.ajax({
+        beforeSend: function(){
+            $("#contenido").html("<center><img src='img/spinner.svg' /><br>Cargando ...</center>");
+        },
+        type:    "post",
+        url:     url,
+        data:    params,
+        success: function(data){
+            $("#contenido").html(data);
+            CKEDITOR.replace('text1', {
+                customConfig: 'configuracion.js'
+            });
+            enviar_formulario();
+        }
+    });
+
+}
+
+//CATEGORIA BLOG
+function lista_categoriablog(pagina=0){
+    var url    = 'pg/categoria_blog_lista.php';
+    if(pagina != 0 )$("#pagina").val(pagina);
+    var params = $('#form_busqueda').serialize();
+
+    $.ajax({
+        beforeSend: function(){
+            $("#listado").html("<center><img src='img/spinner.svg' /><br>Cargando ...</center>");
+        },
+        type:    "post",
+        url:     url,
+        data:    params,
+        success: function(data){
+            $("#listado").html(data);
+        }
+    });
+}
+
+function registro_categoriablog(id = '-1'){
+    url    = 'pg/categoria_blog_registro.php';
+    params = {'id': id};
+    $.ajax({
+        beforeSend: function(){
+            $("#formulario_registro").html("<center><img src='img/spinner.svg' /><br>Cargando ...</center>");
+        },
+        type:    "post",
+        url:     url,
+        data:    params,
+        success: function(data){
+            $("#formulario_registro").html(data);
+            $("#formulario_registro").trigger('create');
             enviar_formulario();
         }
     });
 }
 
-function lista_estado(pagina = 0){
-    if(pagina != 0) $("#pagina").val(pagina);
-    var url    = 'pg/estado_lista.php';    
+//etiqueta BLOG
+function lista_etiquetablog(pagina=0){
+    var url    = 'pg/etiqueta_blog_lista.php';
+    if(pagina != 0 )$("#pagina").val(pagina);
     var params = $('#form_busqueda').serialize();
 
     $.ajax({
         beforeSend: function(){
-            $("#listado").html(cargando);
+            $("#listado").html("<center><img src='img/spinner.svg' /><br>Cargando ...</center>");
         },
         type:    "post",
         url:     url,
         data:    params,
-        success: function(data){            
+        success: function(data){
             $("#listado").html(data);
-            activarTooltipAjax()
         }
     });
 }
-// FIN ESTADOS
 
-
-
-// INICIO MUNICIPIO
-function registro_municipio(id = '-1'){
-    url    = 'pg/municipio_registro.php';  
-    params = {'id': id}; 
-
+function registro_etiquetablog(id = '-1'){
+    url    = 'pg/etiqueta_blog_registro.php';
+    params = {'id': id};
     $.ajax({
         beforeSend: function(){
-            $("#formulario-registro").html(cargando);
+            $("#formulario_registro").html("<center><img src='img/spinner.svg' /><br>Cargando ...</center>");
         },
         type:    "post",
         url:     url,
         data:    params,
-        success: function(data){            
-            $("#formulario-registro").html(data);
-            $("#formulario-registro").trigger('create');
+        success: function(data){
+            $("#formulario_registro").html(data);
+            $("#formulario_registro").trigger('create');
             enviar_formulario();
         }
     });
 }
 
-function lista_municipio(pagina=0){
+// proyectos
+
+function lista_proyecto(pagina=0){
+    url    = 'pg/proyecto_lista.php';
     if(pagina != 0) $("#pagina").val(pagina);
-    var url    = 'pg/municipio_lista.php';    
     var params = $('#form_busqueda').serialize();
+
+    $('#titulo').html("Proyecto");
+    $('#boton-registro').show();
+    $('#boton-regresar').hide();
+    $('#mostrar-busqueda').show();
 
     $.ajax({
         beforeSend: function(){
-            $("#listado").html(cargando);
+            $("#contenido").html("<center><img src='img/spinner.svg' /><br>Cargando ...</center>");
         },
         type:    "post",
         url:     url,
         data:    params,
-        success: function(data){            
-            $("#listado").html(data);
-            activarTooltipAjax()
+        success: function(data){
+            $("#contenido").html(data);
         }
     });
 }
-// FIN MUNICIPIO
+
+function registro_proyecto(id = '-1'){
+    url    = 'pg/proyecto_registro.php';
+    params = {'id': id};
+
+    if(id > 0) $('#breadcrumb-titulo').html("Editar Proyecto");
+
+    if(id <= 0) $('#breadcrumb-titulo').html("Registrar Proyecto");
+
+    $('#boton-registro').hide();
+    $('#boton-regresar').show();
+    $('#mostrar-busqueda').hide();
+
+    $.ajax({
+        beforeSend: function(){
+            $("#contenido").html("<center><img src='img/spinner.svg' /><br>Cargando ...</center>");
+        },
+        type:    "post",
+        url:     url,
+        data:    params,
+        success: function(data){
+            $("#contenido").html(data);
+            CKEDITOR.replace('text1', {
+                customConfig: 'configuracion.js'
+            });
+            enviar_formulario();
+        }
+    });
+}
+
+
+
 
 ////////// FIN CATÁLOGOS
 
@@ -397,3 +498,416 @@ function max_caracteres(object)
 }
 
 //--------------- Script solo para delimitar caracteres --------------------
+
+function enviar_formulario(id = '') {
+    var botton_cargando = $('<button class="btn btn-primary mb-1" type="button" disabled><span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>Enviando...</button>');
+    var btn_guardar = $("#btn_guardar" + id);
+    var btn_original = $("#btn_guardar" + id);
+    $('#enviar_formulario'+id).submit(function (e) {
+        e.preventDefault();
+        var cant_ckeditor = $(".env_editor").toArray().length;
+        formData = new FormData($('#enviar_formulario'+id)[0]);
+        if(cant_ckeditor != 0)
+        {
+            for(var i = 1; i <= cant_ckeditor;i++)
+            {
+                var contenido = CKEDITOR.instances['text'+i].getData();
+                formData.append('text'+i, contenido);
+            }
+        }
+        $.ajax({
+            type: 'POST',
+            url: $("#enviar_formulario" + id).attr('action'),
+            contentType: false,
+            processData: false,
+            data: formData,
+            beforeSend: function () {
+                btn_guardar.replaceWith(botton_cargando);
+            },
+            success: function (datos) {
+                datos = JSON.parse(datos);
+
+                notificacion(datos.mensaje, datos.titulo, datos.tipo);
+                if (datos.funcion) {
+                    for (i = 0; i < datos.funcion.length; i++) {
+                        let param = [];
+                        if (datos.params && datos.params[i]) {
+                            param = datos.params[i];
+                        }
+                        window[datos.funcion[i]](...param);
+                    }
+                }
+
+                // Reemplazar el botón de cargando por el botón de guardar
+                botton_cargando.replaceWith(btn_original);
+            },
+            error: function (jqXHR, exception) {
+                var msg = '';
+                if (jqXHR.status === 0) {
+                    msg = 'Not connect.\n Verify Network.';
+                } else if (jqXHR.status == 404) {
+                    msg = 'Requested page not found. [404]';
+                } else if (jqXHR.status == 500) {
+                    msg = 'Internal Server Error [500].';
+                } else if (exception === 'parsererror') {
+                    msg = 'Requested JSON parse failed.';
+                } else if (exception === 'timeout') {
+                    msg = 'Time out error.';
+                } else if (exception === 'abort') {
+                    msg = 'Ajax request aborted.';
+                } else {
+                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                }
+
+                botton_cargando.replaceWith(btn_original);
+
+                notificacion(msg, 'Error', 'error');
+            }
+        });
+    });
+
+}
+
+
+//CATEGORIA PROYECTO
+function lista_categoriaproyecto(pagina=0){
+    var url    = 'pg/categoria_proyecto_lista.php';
+    if(pagina != 0 )$("#pagina").val(pagina);
+    var params = $('#form_busqueda').serialize();
+
+    $.ajax({
+        beforeSend: function(){
+            $("#listado").html("<center><img src='img/spinner.svg' /><br>Cargando ...</center>");
+        },
+        type:    "post",
+        url:     url,
+        data:    params,
+        success: function(data){
+            $("#listado").html(data);
+        }
+    });
+}
+
+function registro_categoriaproyecto(id = '-1'){
+    url    = 'pg/categoria_proyecto_registro.php';
+    params = {'id': id};
+    $.ajax({
+        beforeSend: function(){
+            $("#formulario_registro").html("<center><img src='img/spinner.svg' /><br>Cargando ...</center>");
+        },
+        type:    "post",
+        url:     url,
+        data:    params,
+        success: function(data){
+            $("#formulario_registro").html(data);
+            $("#formulario_registro").trigger('create');
+            enviar_formulario();
+        }
+    });
+}
+
+function lista_servicio(pagina=0){
+    url    = 'pg/servicio_lista.php';
+    if(pagina != 0) $("#pagina").val(pagina);
+    var params = $('#form_busqueda').serialize();
+
+    $('#titulo').html("Servicio");
+    $('#boton-registro').show();
+    $('#boton-regresar').hide();
+    $('#mostrar-busqueda').show();
+
+    $.ajax({
+        beforeSend: function(){
+            $("#contenido").html("<center><img src='img/spinner.svg' /><br>Cargando ...</center>");
+        },
+        type:    "post",
+        url:     url,
+        data:    params,
+        success: function(data){
+            $("#contenido").html(data);
+        }
+    });
+}
+
+function registro_servicio(id = '-1'){
+    url    = 'pg/servicio_registro.php';
+    params = {'id': id};
+
+    if(id > 0) $('#breadcrumb-titulo').html("Editar Servicio");
+
+    if(id <= 0) $('#breadcrumb-titulo').html("Registrar Servicio");
+
+    $('#boton-registro').hide();
+    $('#boton-regresar').show();
+    $('#mostrar-busqueda').hide();
+
+    $.ajax({
+        beforeSend: function(){
+            $("#contenido").html("<center><img src='img/spinner.svg' /><br>Cargando ...</center>");
+        },
+        type:    "post",
+        url:     url,
+        data:    params,
+        success: function(data){
+            $("#contenido").html(data);
+            CKEDITOR.replace('text1', {
+                customConfig: 'configuracion.js'
+            });
+            enviar_formulario();
+        }
+    });
+}
+
+//CATEGORIA SERVICIO
+function lista_categoriaservicio(pagina=0){
+    var url    = 'pg/categoria_servicio_lista.php';
+    if(pagina != 0 )$("#pagina").val(pagina);
+    var params = $('#form_busqueda').serialize();
+
+    $.ajax({
+        beforeSend: function(){
+            $("#listado").html("<center><img src='img/spinner.svg' /><br>Cargando ...</center>");
+        },
+        type:    "post",
+        url:     url,
+        data:    params,
+        success: function(data){
+            $("#listado").html(data);
+        }
+    });
+}
+
+function registro_categoriaservicio(id = '-1'){
+    url    = 'pg/categoria_servicio_registro.php';
+    params = {'id': id};
+    $.ajax({
+        beforeSend: function(){
+            $("#formulario_registro").html("<center><img src='img/spinner.svg' /><br>Cargando ...</center>");
+        },
+        type:    "post",
+        url:     url,
+        data:    params,
+        success: function(data){
+            $("#formulario_registro").html(data);
+            $("#formulario_registro").trigger('create');
+            enviar_formulario();
+        }
+    });
+}
+
+//PREGUNTAS FRECUENTES
+function lista_preguntafrecuente(pagina=0){
+    var url    = 'pg/pregunta_frecuente_lista.php';
+    if(pagina != 0 )$("#pagina").val(pagina);
+    var params = $('#form_busqueda').serialize();
+
+    $.ajax({
+        beforeSend: function(){
+            $("#listado").html("<center><img src='img/spinner.svg' /><br>Cargando ...</center>");
+        },
+        type:    "post",
+        url:     url,
+        data:    params,
+        success: function(data){
+            $("#listado").html(data);
+        }
+    });
+}
+
+function registro_preguntafrecuente(id = '-1'){
+    url    = 'pg/pregunta_frecuente_registro.php';
+    params = {'id': id};
+    $.ajax({
+        beforeSend: function(){
+            $("#formulario_registro").html("<center><img src='img/spinner.svg' /><br>Cargando ...</center>");
+        },
+        type:    "post",
+        url:     url,
+        data:    params,
+        success: function(data){
+            $("#formulario_registro").html(data);
+            $("#formulario_registro").trigger('create');
+            enviar_formulario();
+        }
+    });
+}
+
+// TABLA TESTIMONIO
+
+function lista_testimonio(pagina=0){
+    url    = 'pg/testimonio_lista.php';
+    if(pagina != 0) $("#pagina").val(pagina);
+    var params = $('#form_busqueda').serialize();
+
+    $('#titulo').html("Testimonio");
+    $('#boton-registro').show();
+    $('#boton-regresar').hide();
+    $('#mostrar-busqueda').show();
+
+    $.ajax({
+        beforeSend: function(){
+            $("#contenido").html("<center><img src='img/spinner.svg' /><br>Cargando ...</center>");
+        },
+        type:    "post",
+        url:     url,
+        data:    params,
+        success: function(data){
+            $("#contenido").html(data);
+        }
+    });
+}
+
+function registro_testimonio(id = '-1'){
+    url    = 'pg/testimonio_registro.php';
+    params = {'id': id};
+
+    if(id > 0) $('#breadcrumb-titulo').html("Editar Testimonio");
+
+    if(id <= 0) $('#breadcrumb-titulo').html("Registrar Testimonio");
+
+    $('#boton-registro').hide();
+    $('#boton-regresar').show();
+    $('#mostrar-busqueda').hide();
+
+    $.ajax({
+        beforeSend: function(){
+            $("#contenido").html("<center><img src='img/spinner.svg' /><br>Cargando ...</center>");
+        },
+        type:    "post",
+        url:     url,
+        data:    params,
+        success: function(data){
+            $("#contenido").html(data);
+            CKEDITOR.replace('text1', {
+                customConfig: 'configuracion.js'
+            });
+            enviar_formulario();
+        }
+    });
+}
+
+//COMENTARIOS
+
+function lista_comentario(pagina=0){
+    var url    = 'pg/comentario_lista.php';
+    if(pagina != 0 )$("#pagina").val(pagina);
+    var params = $('#form_busqueda').serialize();
+
+    $.ajax({
+        beforeSend: function(){
+            $("#listado").html("<center><img src='img/spinner.svg' /><br>Cargando ...</center>");
+        },
+        type:    "post",
+        url:     url,
+        data:    params,
+        success: function(data){
+            $("#listado").html(data);
+        }
+    });
+}
+
+function registro_comentario(id = '-1'){
+    url    = 'pg/comentario_registro.php';
+    params = {'id': id};
+    $.ajax({
+        beforeSend: function(){
+            $("#formulario_registro").html("<center><img src='img/spinner.svg' /><br>Cargando ...</center>");
+        },
+        type:    "post",
+        url:     url,
+        data:    params,
+        success: function(data){
+            $("#formulario_registro").html(data);
+            $("#formulario_registro").trigger('create');
+            enviar_formulario();
+        }
+    });
+}
+
+//SLIDERS
+
+function slider_lista(pagina=0){
+    var url    = 'pg/slider_lista.php';
+    if(pagina != 0 )$("#pagina").val(pagina);
+    var params = $('#form_busqueda').serialize();
+
+    $.ajax({
+        beforeSend: function(){
+            $("#listado").html("<center><img src='img/spinner.svg' /><br>Cargando ...</center>");
+        },
+        type:    "post",
+        url:     url,
+        data:    params,
+        success: function(data){
+            $("#listado").html(data);
+        }
+    });
+}
+
+function slider_registro(id = '-1'){
+    url    = 'pg/slider_registro.php';
+    params = {'id': id};
+    $.ajax({
+        beforeSend: function(){
+            $("#formulario_registro").html("<center><img src='img/spinner.svg' /><br>Cargando ...</center>");
+        },
+        type:    "post",
+        url:     url,
+        data:    params,
+        success: function(data){
+            $("#formulario_registro").html(data);
+            $("#formulario_registro").trigger('create');
+            enviar_formulario();
+        }
+    });
+}
+
+
+//CLIENTES
+function cliente_lista(pagina=1){
+    var url    = 'pg/cliente_lista.php';    
+    var params = $('#form_busqueda').serialize();
+
+    $('#boton-registro').show();
+    $('#boton-regresar').hide();
+    $('#mostrar-busqueda').show();
+
+    $.ajax({
+        beforeSend: function(){
+            $("#contenido").html("<center><img src='img/spinner.svg' /><br>Cargando ...</center>");
+        },
+        type:    "post",
+        url:     url,
+        data:    params+"&pagina="+pagina,
+        success: function(data){            
+            $("#contenido").html(data);
+        }
+    });
+}
+
+function cliente_registro(id = '-1'){
+    url    = 'pg/cliente_registro.php';  
+    params = {'id': id}; 
+
+    $('#boton-registro').hide();
+    $('#boton-regresar').show();
+    $('#mostrar-busqueda').hide();
+    
+    $.ajax({
+        beforeSend: function(){
+            $("#contenido").html("<center><img src='img/spinner.svg' /><br>Cargando ...</center>");
+        },
+        type:    "post",
+        url:     url,
+        data:    params,
+        success: function(data){            
+            $("#contenido").html(data);
+            $("#contenido").trigger('create');
+            enviar_formulario();
+            //setTimeout(mapa_form, 1000);
+        }
+    });
+}
+
+
+

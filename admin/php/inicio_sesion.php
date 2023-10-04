@@ -77,8 +77,6 @@
 				</script>';
 	}
 	else{
-
-		$config_data = $conexion->fetch_array($querys->getConfiguracion());
 	
 		//INICIALIZANDO VARIABLES DE SESIÓN*************************
 		$_SESSION['autentificado_sis'] = md5("sistemacasaempenio");
@@ -92,9 +90,6 @@
 			'tiene_horario' => $dato["tiene_horario"],
 			'tipo' => $dato["tipo"],
 		);
-		$_SESSION['IsAuthorized'] = true;
-		$_SESSION['foto'] = $dato['foto'];
-		$_SESSION['dominio'] = $config_data['dominio'];
 
 		//OPCIÓN PARA DIRECCIONAR A LA PÁGINA DE INICIO TRAS LOGUEO EXITOSO
 		echo '<script languaje="javascript">

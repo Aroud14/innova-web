@@ -1343,17 +1343,24 @@ class Funciones {
 		echo "$".number_format($valor, 2, '.', ',')." ".$valor2;
 	}
 
-	public function getComboTipoPermiso($value)
-	{
-		//$array_visible=array('-1'=>'Estatus(Todos)', 1=>"SI", 0=>"NO");
-		$array_visible=array(1=>"MENU DERECHA", 2=>"SIN MENU");
+    public function estatusactivo($id)
+    {
+        switch($id){
+            case 1: $publicado = '<span style="color:green;">Activo</span>'; break;
+            case 2: $publicado = '<span style="color:#C00">NO Activo</span>'; break;
+            case 0: $publicado = '<span style="color:#C00">NO</span>'; break;
+        }
+        return $publicado;
+    }
 
-		foreach($array_visible as $t => $visible)
-		{
-			if($value==$t) echo "<option value='".$t."' selected='selected'>".$visible."</option>";
-			else echo "<option value='".$t."'>".$visible."</option>";
-		}
-	}
+    public function estatus_tipoact($id)
+    {
+        switch($id){
+            case 1: $publicado = "<font color='green'>Activo</font>"; break;
+            case 0: $publicado = '<font color="red">No Activo</font>'; break;
+        }
+        return $publicado;
+    }
 
 } //fin de la Clse Funciones
 
