@@ -36,7 +36,8 @@ class DB_mysql extends Variables{
 		}	 
 		/* Si hemos tenido éxito conectando devuelve 	
 		el identificador de la conexión, sino devuelve 0 */
-		mysqli_set_charset($this->Conexion_ID,'utf8');
+		mysqli_set_charset($this->Conexion_ID, 'utf8mb4');
+		
 		return $this->Conexion_ID;	
 	}
 	

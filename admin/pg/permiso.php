@@ -65,27 +65,12 @@ window.onload = function() {
 
                     </div>
 
-                    <div class="col-sm-6 col-md-12">
-                        <div class="row">
-                            <div class="col-md-1">
-                                <button type="button" class="btn btn-success btn-sm" onclick="permiso_lista();"><i class="fa fa-search"></i> Buscar</button>
-                            </div>
-
-                            <div class="col-md-2">
-                                <button 
-                                    type="button" 
-                                    class="btn btn-danger btn-sm"
-                                    onclick="cancelar('form_busqueda', [
-                                        { fn: permiso_lista}
-                                    ]);"
-                                >
-                                    <i class="fas fa-times"></i> Cancelar
-                                </button>
-                            </div>
-                        </div>
+                    <!--.row-->
+                    <div class="text-left">
+                        <input type="hidden" name="pagina" id="pagina" value="1">
+                        <input type="button" class="btn btn-success btn-sm" value=" Buscar " onclick="permiso_lista()" />
+                        <input type="button" class="btn btn-danger btn-sm" value=" Cancelar " onclick="location.href='permiso'"/>
                     </div>
-
-                    <input type="hidden" name="pagina" id="pagina" value="1">
 
                 </form>
             </div>

@@ -1,6 +1,6 @@
 <script>
     window.onload = function () {
-        configuracion_registro();
+        registro_configuracion();
     }
 </script>
 

@@ -333,91 +333,493 @@ class Querys {
 	//------------------------- FIN log ---------------------------
 
 
-
-	//---------------------------INICIO ESTADO-----------------------------  
-	function getEstado($id){
-		$strQuery = "SELECT * FROM tblc_estado WHERE id_estado = " .$id;
+	//---------------------------TABLA BLOG-------------------------------
+	public function getBlog(int $id)
+	{
+		$strQuery = "SELECT * FROM tbl_blog WHERE id_blog = {$id}";
 		return $strQuery;
 	}
 
-	function getNombreEstado($id){
-		$strQuery = "SELECT nombre FROM tblc_estado WHERE id_estado = " .$id;
+	public function getBlogList($titulo, $fecha, $inicio, $limite){
+		$sentencia = ($titulo != '') ? " AND titulo LIKE '%".$titulo."%'" : '';
+		$sentencia .= ($fecha != '') ? " AND fecha LIKE '%".$fecha."%'" : '';
+
+
+		$strQuery = 'SELECT * FROM tbl_blog';
+		$strQuery .= ' WHERE fecha_eliminado IS NULL'.$sentencia;
+		$strQuery .= ' ORDER BY titulo ASC LIMIT ';
+		$strQuery .= $inicio.",".$limite;
+
 		return $strQuery;
 	}
 
-	function getListaEstado($nombre, $claveInegi, $inicio, $limite){
-		$sentencia = ($nombre != "") ? " AND nombre LIKE '%".$nombre."%'" : '';
-		$sentencia.= ($claveInegi != "") ? " AND clave_inegi LIKE '%".$claveInegi."%'" : '';
-		$strQuery = "SELECT * FROM tblc_estado WHERE fecha_eliminado IS NULL " . $sentencia . " ORDER BY nombre LIMIT " .$inicio. ',' .$limite;
+	public function getBlogCount($nombre, $fecha){
+		$sentencia = ($nombre != '') ? " AND t.titulo LIKE '%".$nombre."%'" : '';
+		$sentencia .= ($fecha != '') ? " AND t.fecha LIKE '%".$fecha."%'" : '';
+
+		$strQuery = "SELECT COUNT(t.id_blog) FROM tbl_blog as t";
+		$strQuery .= ' WHERE t.fecha_eliminado IS NULL'.$sentencia;
+
 		return $strQuery;
 	}
 
-	function getConteoListaEstado($nombre, $claveInegi){
-		$sentencia = ($nombre != "") ? " AND nombre LIKE '%".$nombre."%'" : '';
-		$sentencia.= ($claveInegi != "") ? " AND clave_inegi LIKE '%".$claveInegi."%'" : '';
-		$strQuery = "SELECT COUNT(id_estado) FROM tblc_estado WHERE fecha_eliminado IS NULL " . $sentencia;
+	public function eliminarBlog($id){
+		$strQuery = 'UPDATE tbl_blog SET fecha_eliminado = NOW() WHERE id_blog = '.$id;
 		return $strQuery;
 	}
 
-	function getComboEstados(){
-		$strQuery = "SELECT id_estado AS id, nombre AS valor FROM tblc_estado WHERE fecha_eliminado IS NULL ORDER BY nombre";
+	public function getComboBlog(){
+
+		$strQuery = 'SELECT id_blog as id, titulo as valor FROM tbl_blog
+					WHERE fecha_eliminado IS NULL';
+		return $strQuery;
+	}
+	//---------------------------TABLA FIN BLOG---------------------------
+
+	//---------------------------TABLA CATEGORIA BLOG---------------------
+	public function getcategoriablog(int $id)
+	{
+		$strQuery = "SELECT * FROM tblc_categoria_blog WHERE id_categoria_blog = {$id}";
 		return $strQuery;
 	}
 
-	// ELIMINAR ESTADO
-	function eliminarEstado($id){
-		$strQuery = "UPDATE tblc_estado SET fecha_eliminado = NOW() WHERE id_estado = " .$id;
-		return $strQuery;
-	}
-	//---------------------------FIN ESTADO-------------------------------
+	public function getlistcategoriablog($nombre, $inicio, $limite){
+		$sentencia = ($nombre != '') ? " AND nombre LIKE '%".$nombre."%'" : '';
 
+		$strQuery = 'SELECT * FROM tblc_categoria_blog';
+		$strQuery .= ' WHERE fecha_eliminado IS NULL'.$sentencia;
+		$strQuery .= ' ORDER BY nombre ASC LIMIT ';
+		$strQuery .= $inicio.",".$limite;
 
-
-	//---------------------------INICIO MUNICIPIO-----------------------------  
-	function getMunicipio($id){
-		$strQuery = "SELECT * FROM tblc_municipio WHERE id_municipio = " .$id;
 		return $strQuery;
 	}
 
-	function getNombreMunicipio($id){
-		$strQuery = "SELECT nombre FROM tblc_municipio WHERE id_municipio = " .$id;
+	public function getconteocategoriablog($nombre){
+		$sentencia = ($nombre != '') ? " AND nombre LIKE '%".$nombre."%'" : '';
+
+		$strQuery = 'SELECT COUNT(id_categoria_blog) FROM tblc_categoria_blog
+					 WHERE fecha_eliminado IS NULL'.$sentencia;
+
 		return $strQuery;
 	}
 
-	function getComboMunicipios($id){
-		$strQuery = "SELECT id_municipio AS id, nombre as valor FROM tblc_municipio WHERE fecha_eliminado IS NULL AND id_estado = " . $id . " ORDER BY nombre";
+	public function eliminarcategoriablog($id){
+		$strQuery = 'UPDATE tblc_categoria_blog SET fecha_eliminado = NOW() WHERE id_categoria_blog = '.$id;
+		return $strQuery;
+	}
+	public function getcombocategoriablog(){
+		$strQuery = 'SELECT id_categoria_blog as id, nombre as valor FROM tblc_categoria_blog
+					WHERE fecha_eliminado IS NULL';
 		return $strQuery;
 	}
 
-	function getNombreEstadoPorMunicipio($id){
-		$strQuery = "SELECT e.nombre FROM tblc_estado AS e
-		INNER JOIN tblc_municipio AS m ON m.id_estado = e.id_estado
-		WHERE m.id_municipio = " .$id;
+	//------------------------ TABLA ETIQUETA BLOG --------
+
+	public function getetiquetablog(int $id)
+	{
+		$strQuery = "SELECT * FROM tblc_etiqueta_blog WHERE id_etiqueta_blog = {$id}";
 		return $strQuery;
 	}
 
-	function getListaMunicipio($nombre, $estado, $claveInegi, $inicio, $limite){
-		$sentencia = ($nombre != "") ? " AND nombre LIKE '%".$nombre."%'" : '';
-		$sentencia.= ($estado != "") ? " AND id_estado = '".$estado."'" : '';
-		$sentencia.= ($claveInegi != "") ? " AND clave_inegi LIKE '%".$claveInegi."%'" : '';
-		$strQuery = "SELECT * FROM tblc_municipio WHERE fecha_eliminado IS NULL " . $sentencia . " ORDER BY nombre LIMIT " .$inicio. ',' .$limite;
+	public function getlistetiquetablog($nombre, $inicio, $limite){
+		$sentencia = ($nombre != '') ? " AND nombre LIKE '%".$nombre."%'" : '';
+
+		$strQuery = 'SELECT * FROM tblc_etiqueta_blog';
+		$strQuery .= ' WHERE fecha_eliminado IS NULL'.$sentencia;
+		$strQuery .= ' ORDER BY nombre ASC LIMIT ';
+		$strQuery .= $inicio.",".$limite;
+
 		return $strQuery;
 	}
 
-	function getConteoListaMunicipio($nombre, $estado, $claveInegi){
-		$sentencia = ($nombre != "") ? " AND nombre LIKE '%".$nombre."%'" : '';
-		$sentencia.= ($estado != "") ? " AND id_estado = '".$estado."' " : '';
-		$sentencia.= ($claveInegi != "") ? " AND clave_inegi LIKE '%".$claveInegi."%'" : '';
-		$strQuery = "SELECT COUNT(id_municipio) FROM tblc_municipio WHERE fecha_eliminado IS NULL " . $sentencia;
+	public function getconteoetiquetablog($nombre){
+		$sentencia = ($nombre != '') ? " AND nombre LIKE '%".$nombre."%'" : '';
+
+		$strQuery = 'SELECT COUNT(id_etiqueta_blog) FROM tblc_etiqueta_blog
+					 WHERE fecha_eliminado IS NULL'.$sentencia;
+
 		return $strQuery;
 	}
 
-	// ELIMINAR ESTADO
-	function eliminarMunicipio($id){
-		$strQuery = "UPDATE tblc_municipio SET fecha_eliminado = NOW() WHERE id_municipio = " .$id;
+	public function eliminaretiquetablog($id){
+		$strQuery = 'UPDATE tblc_etiqueta_blog SET fecha_eliminado = NOW() WHERE id_etiqueta_blog = '.$id;
 		return $strQuery;
 	}
-	//---------------------------FIN MUNICIPIO-------------------------------
+	public function getcomboetiquetablog(){
+		$strQuery = 'SELECT id_etiqueta_blog as id, nombre as valor FROM tblc_etiqueta_blog
+					WHERE fecha_eliminado IS NULL';
+		return $strQuery;
+	}
+
+	//---------------- TABLA CATEGORIA SERVICIO
+
+	public function getcategoriaservicio(int $id){
+		return "SELECT * FROM tblc_categoria_servicio WHERE id_categoria_servicio ={$id}";
+	}
+
+	public function getlistcategoriaservicio($nombre, $inicio, $limite){
+		$sentencia = ($nombre != '') ? " AND nombre LIKE '%".$nombre."%'" : '';
+
+		$strQuery = 'SELECT * FROM tblc_categoria_servicio';
+		$strQuery .= ' WHERE fecha_eliminado IS NULL'.$sentencia;
+		$strQuery .= ' ORDER BY nombre ASC LIMIT ';
+		$strQuery .= $inicio.",".$limite;
+
+		return $strQuery;
+	}
+
+	public function getconteocategoriaservicio($nombre){
+		$sentencia = ($nombre != '') ? " AND nombre LIKE '%".$nombre."%'" : '';
+
+		return 'SELECT COUNT(id_categoria_servicio) FROM tblc_categoria_servicio
+					 WHERE fecha_eliminado IS NULL'.$sentencia;
+	}
+
+	public function eliminarcategoriaservicio($id){
+		return 'UPDATE tblc_categoria_servicio SET fecha_eliminado = NOW() WHERE id_categoria_servicio = '.$id;
+	}
+	public function getcombocategoriaservicio(){
+		return 'SELECT id_categoria_servicio as id, nombre as valor FROM tblc_categoria_servicio
+					WHERE fecha_eliminado IS NULL';
+	}
+
+	//---------------- TABLA PREGUNTA FRECUENTE
+
+	public function getpreguntafrecuente(int $id){
+		return "SELECT * FROM tblc_pregunta_frecuente WHERE id_pregunta_frecuente ={$id}";
+	}
+
+	public function getlistpreguntafrecuente($nombre, $inicio, $limite){
+		$sentencia = ($nombre != '') ? " AND nombre LIKE '%".$nombre."%'" : '';
+
+		$strQuery = 'SELECT * FROM tblc_pregunta_frecuente';
+		$strQuery .= ' WHERE fecha_eliminado IS NULL'.$sentencia;
+		$strQuery .= ' ORDER BY nombre ASC LIMIT ';
+		$strQuery .= $inicio.",".$limite;
+
+		return $strQuery;
+	}
+
+
+	public function getconteopreguntafrecuente($nombre){
+		$sentencia = ($nombre != '') ? " AND nombre LIKE '%".$nombre."%'" : '';
+
+		return 'SELECT COUNT(id_pregunta_frecuente) FROM tblc_pregunta_frecuente
+					 WHERE fecha_eliminado IS NULL'.$sentencia;
+	}
+
+	public function eliminarpreguntafrecuente($id){
+		return 'UPDATE tblc_pregunta_frecuente SET fecha_eliminado = NOW() WHERE id_pregunta_frecuente = '.$id;
+	}
+	public function getcombopreguntafrecuente(){
+		return 'SELECT id_pregunta_frecuente as id, pregunta as valor FROM tblc_pregunta_frecuente
+					WHERE fecha_eliminado IS NULL';
+	}
+
+	//---------------- TABLA SUBTEMA
+
+	public function getsubtema(int $id){
+		return "SELECT * FROM tblc_subtema WHERE id_subtema ={$id}";
+	}
+
+	public function getlistsubtema($nombre, $inicio, $limite){
+		$sentencia = ($nombre != '') ? " AND nombre LIKE '%".$nombre."%'" : '';
+
+		$strQuery = 'SELECT * FROM tblc_subtema';
+		$strQuery .= ' WHERE fecha_eliminado IS NULL'.$sentencia;
+		$strQuery .= ' ORDER BY nombre ASC LIMIT ';
+		$strQuery .= $inicio.",".$limite;
+
+		return $strQuery;
+
+	}
+
+		public function getconteosubtema($nombre){
+		$sentencia = ($nombre != '') ? " AND nombre LIKE '%".$nombre."%'" : '';
+
+		return 'SELECT COUNT(id_subtema) FROM tblc_subtema
+					 WHERE fecha_eliminado IS NULL'.$sentencia;
+	}
+
+	public function eliminarsubtema($id){
+		return 'UPDATE tblc_subtema SET fecha_eliminado = NOW() WHERE id_subtema = '.$id;
+	}
+	public function getcombosubtema(){
+		return 'SELECT id_subtema as id, titulo as valor FROM tblc_subtema
+					WHERE fecha_eliminado IS NULL';}
+
+
+	//---------------- TABLA PROYECTO
+
+	public function getproyecto(int $id){
+		return "SELECT * FROM tbl_proyecto WHERE id_proyecto={$id}";
+	}
+
+	public function getlistproyecto($titulo, $fecha, $inicio, $limite){
+		$sentencia = ($titulo != '') ? " AND titulo LIKE '%".$titulo."%'" : '';
+		$sentencia .= ($fecha != '') ? " AND fecha LIKE '%".$fecha."%'" : '';
+
+
+		$strQuery = 'SELECT * FROM tbl_proyecto';
+		$strQuery .= ' WHERE fecha_eliminado IS NULL'.$sentencia;
+		$strQuery .= ' ORDER BY titulo ASC LIMIT ';
+		$strQuery .= $inicio.",".$limite;
+
+		return $strQuery;
+	}
+
+	public function getconteoproyecto($nombre, $fecha){
+		$sentencia = ($nombre != '') ? " AND t.titulo LIKE '%".$nombre."%'" : '';
+		$sentencia .= ($fecha != '') ? " AND t.fecha LIKE '%".$fecha."%'" : '';
+
+		$strQuery = "SELECT COUNT(t.id_proyecto) FROM tbl_proyecto as t";
+		$strQuery .= ' WHERE t.fecha_eliminado IS NULL'.$sentencia;
+
+		return $strQuery;
+	}
+
+	public function eliminarproyecto($id){
+		return 'UPDATE tbl_proyecto SET fecha_eliminado = NOW() WHERE id_proyecto = '.$id;
+	}
+	public function getcomboproyecto(){
+		return 'SELECT id_proyecto as id, titulo as valor FROM tbl_proyecto
+					WHERE fecha_eliminado IS NULL';}
+
+	//---------------- TABLA CATEGORIA PROYECTO
+
+
+	public function getcategoriaproyecto(int $id){
+		return "SELECT * FROM tblc_categoria_proyecto WHERE id_categoria_proyecto ={$id}";
+	}
+
+	public function getlistcategoriaproyecto($nombre, $inicio, $limite){
+		$sentencia = ($nombre != '') ? " AND nombre LIKE '%".$nombre."%'" : '';
+
+		$strQuery = 'SELECT * FROM tblc_categoria_proyecto';
+		$strQuery .= ' WHERE fecha_eliminado IS NULL'.$sentencia;
+		$strQuery .= ' ORDER BY nombre ASC LIMIT ';
+		$strQuery .= $inicio.",".$limite;
+
+		return $strQuery;
+	}
+
+	public function getconteocategoriaproyecto($nombre){
+		$sentencia = ($nombre != '') ? " AND nombre LIKE '%".$nombre."%'" : '';
+
+		return 'SELECT COUNT(id_categoria_proyecto) FROM tblc_categoria_proyecto
+					 WHERE fecha_eliminado IS NULL'.$sentencia;
+	}
+
+	public function eliminarcategoriaproyecto($id){
+		return 'UPDATE tblc_categoria_proyecto SET fecha_eliminado = NOW() WHERE id_categoria_proyecto = '.$id;
+	}
+	public function getcombocategoriaproyecto(){
+		return 'SELECT id_categoria_proyecto as id, nombre as valor FROM tblc_categoria_proyecto
+					WHERE fecha_eliminado IS NULL';
+	}
+
+	//---------------- TABLA SERVICIO
+
+	public function getservicio(int $id){
+		return "SELECT * FROM tbl_servicio WHERE id_servicio={$id}";
+	}
+
+	public function getlistservicio($titulo, $fecha, $inicio, $limite){
+		$sentencia = ($titulo != '') ? " AND titulo LIKE '%".$titulo."%'" : '';
+		$sentencia .= ($fecha != '') ? " AND fecha LIKE '%".$fecha."%'" : '';
+
+
+		$strQuery = 'SELECT * FROM tbl_servicio';
+		$strQuery .= ' WHERE fecha_eliminado IS NULL'.$sentencia;
+		$strQuery .= ' ORDER BY titulo ASC LIMIT ';
+		$strQuery .= $inicio.",".$limite;
+
+		return $strQuery;
+	}
+
+	public function getconteoservicio($nombre, $fecha){
+		$sentencia = ($nombre != '') ? " AND t.titulo LIKE '%".$nombre."%'" : '';
+		$sentencia .= ($fecha != '') ? " AND t.fecha LIKE '%".$fecha."%'" : '';
+
+		$strQuery = "SELECT COUNT(t.id_servicio) FROM tbl_servicio as t";
+		$strQuery .= ' WHERE t.fecha_eliminado IS NULL'.$sentencia;
+
+		return $strQuery;
+	}
+
+	public function eliminarservicio($id){
+		return 'UPDATE tbl_servicio SET fecha_eliminado = NOW() WHERE id_servicio = '.$id;
+	}
+	public function getcomboservicio(){
+		return 'SELECT id_servicio as id, titulo as valor FROM tbl_servicio
+					WHERE fecha_eliminado IS NULL';}
+
+
+	//	TESTIMONIOS
+
+	public function gettestimonio(int $id)
+	{
+		$strQuery = "SELECT * FROM tbl_testimonio WHERE id_testimonio = {$id}";
+		return $strQuery;
+	}
+
+	public function getlisttestimonio($titulo, $fecha, $inicio, $limite){
+		$sentencia = ($titulo != '') ? " AND titulo LIKE '%".$titulo."%'" : '';
+		$sentencia .= ($fecha != '') ? " AND fecha LIKE '%".$fecha."%'" : '';
+
+
+		$strQuery = 'SELECT * FROM tbl_testimonio';
+		$strQuery .= ' WHERE fecha_eliminado IS NULL'.$sentencia;
+		$strQuery .= ' ORDER BY titulo ASC LIMIT ';
+		$strQuery .= $inicio.",".$limite;
+
+		return $strQuery;
+	}
+
+	public function getconteotestimonio($nombre, $fecha){
+		$sentencia = ($nombre != '') ? " AND t.titulo LIKE '%".$nombre."%'" : '';
+		$sentencia .= ($fecha != '') ? " AND t.fecha LIKE '%".$fecha."%'" : '';
+
+		$strQuery = "SELECT COUNT(t.id_testimonio) FROM tbl_testimonio as t";
+		$strQuery .= ' WHERE t.fecha_eliminado IS NULL'.$sentencia;
+
+		return $strQuery;
+	}
+
+	public function eliminartestimonio($id){
+		$strQuery = 'UPDATE tbl_testimonio SET fecha_eliminado = NOW() WHERE id_testimonio = '.$id;
+		return $strQuery;
+	}
+
+	public function getcombotestimonio(){
+
+		$strQuery = 'SELECT id_testimonio as id, titulo as valor FROM tbl_testimonio
+					WHERE fecha_eliminado IS NULL';
+		return $strQuery;
+	}
+
+
+	//---------------------------TABLA COMENTARIO BLOG---------------------
+	public function getcomentario(int $id)
+	{
+		$strQuery = "SELECT * FROM tblc_comentario WHERE id_comentario = {$id}";
+		return $strQuery;
+	}
+
+	public function getlistcomentario($nombre, $inicio, $limite){
+		$sentencia = ($nombre != '') ? " AND nombre LIKE '%".$nombre."%'" : '';
+
+		$strQuery = 'SELECT * FROM tblc_comentario';
+		$strQuery .= ' WHERE fecha_eliminado IS NULL'.$sentencia;
+		$strQuery .= ' ORDER BY nombre ASC LIMIT ';
+		$strQuery .= $inicio.",".$limite;
+
+		return $strQuery;
+	}
+
+	public function getconteocomentario($nombre){
+		$sentencia = ($nombre != '') ? " AND nombre LIKE '%".$nombre."%'" : '';
+
+		$strQuery = 'SELECT COUNT(id_comentario) FROM tblc_comentario
+					 WHERE fecha_eliminado IS NULL'.$sentencia;
+
+		return $strQuery;
+	}
+
+	public function eliminarcomentario($id){
+		$strQuery = 'UPDATE tblc_comentario SET fecha_eliminado = NOW() WHERE id_comentario = '.$id;
+		return $strQuery;
+	}
+	public function getcombocomentario(){
+		$strQuery = 'SELECT id_comentario as id, nombre as valor FROM tblc_comentario
+					WHERE fecha_eliminado IS NULL';
+		return $strQuery;
+	}
+
+	public function getcountcomentariode(int $id){
+		return "SELECT COUNT(id_comentario) FROM tblc_comentario WHERE fecha_eliminado IS NULL AND id_blog={$id}";
+	}
+
+	//---------------------------TABLA SLIDER-------------------------------
+	public function getSlider(int $id)
+	{
+		$strQuery = "SELECT * FROM tbl_slider WHERE id_slider = {$id}";
+		return $strQuery;
+	}
+
+	public function getSliderList($nombre, $inicio, $limite){
+		$sentencia = ($nombre != '') ? " AND nombre LIKE '%".$nombre."%'" : '';
+
+		$strQuery = 'SELECT * FROM tbl_slider';
+		$strQuery .= ' WHERE fecha_eliminado IS NULL'.$sentencia;
+		$strQuery .= ' ORDER BY orden ASC LIMIT ';
+		$strQuery .= $inicio.",".$limite;
+
+		return $strQuery;
+	}
+
+	public function getSliderCount($nombre){
+		$sentencia = ($nombre != '') ? " AND t.nombre LIKE '%".$nombre."%'" : '';
+
+		$strQuery = "SELECT COUNT(t.id_slider) FROM tbl_slider as t";
+		$strQuery .= ' WHERE t.fecha_eliminado IS NULL'.$sentencia;
+
+		return $strQuery;
+	}
+
+	public function eliminarSlider($id){
+		$strQuery = 'UPDATE tbl_slider SET fecha_eliminado = NOW() WHERE id_slider = '.$id;
+		return $strQuery;
+	}
+
+	public function getComboSlider(){
+
+		$strQuery = 'SELECT id_slider as id, titulo as valor FROM tbl_slider
+					WHERE fecha_eliminado IS NULL';
+		return $strQuery;
+	}
+	//---------------------------TABLA FIN BLOG---------------------------
+
+	//---------------------------TABLA CLIENTE-----------------------------
+	//Obtener un registro
+	public function getcliente(int $id)
+	{
+		$strQuery = "SELECT * FROM tbl_cliente WHERE id_cliente = {$id}";
+		return $strQuery;	
+	}
+
+	public function getlistcliente($nombre, $inicio, $limite){
+		$sentencia = ($nombre != '') ? " AND nombre LIKE '%".$nombre."%'" : '';
+
+		$strQuery = 'SELECT * FROM tbl_cliente';
+		$strQuery .= ' WHERE fecha_eliminado IS NULL'.$sentencia;
+		$strQuery .= ' ORDER BY nombre ASC LIMIT ';
+		$strQuery .= $inicio.",".$limite;
+
+		return $strQuery;
+	}
+
+	public function getconteocliente($nombre){
+		$sentencia = ($nombre != '') ? " AND nombre LIKE '%".$nombre."%'" : '';
+
+		$strQuery = 'SELECT COUNT(id_cliente) FROM tbl_cliente
+					 WHERE fecha_eliminado IS NULL'.$sentencia;
+
+		return $strQuery;
+	}
+
+	public function eliminarcliente($id){
+		$strQuery = 'UPDATE tbl_cliente SET fecha_eliminado = NOW() WHERE id_cliente = '.$id;
+		return $strQuery;
+	}
+	public function getcombocliente(){
+		$strQuery = 'SELECT id_cliente as id, nombre as valor FROM tbl_cliente
+					WHERE fecha_eliminado IS NULL';
+		return $strQuery;
+	}
+	//---------------------------TABLA FIN CLIENTE-----------------------------
+
 
 }
+
 ?>

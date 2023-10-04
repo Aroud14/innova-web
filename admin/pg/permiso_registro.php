@@ -59,7 +59,7 @@
                 <div class="col-lg-4">
                     <div class="form-group">
                         <label class="form-label semibold" for="ordenamiento">Ordenamiento</label>
-                        <input required type="number" class="form-control" name="ordenamiento" id="ordenamiento" placeholder="Ordenamiento" value="<?php if(isset($id)) echo $datos['ordenamiento'];?>"">
+                        <input required id="demo3" type="text" class="form-control" name="ordenamiento" id="ordenamiento" placeholder="Ordenamiento" value="<?php if(isset($id)) echo $datos['ordenamiento'];?>" onkeypress="return justNumbers(event);">
                     </div>
                 </div>
 
@@ -88,7 +88,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="form-group">
                         <label class="form-label" for="estatus">Activo</label>
                         <select class="form-control " name="estatus" id="estatus">
@@ -96,20 +96,6 @@
                                 if(isset($id)) echo $funciones->getComboEstatus($datos['estatus']);
                                 else echo $funciones->getComboEstatus(1);
                             ?>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="form-label" for="tipo_colocacion">Tipo</label>
-                        <select id="tipo_colocacion" name="tipo_colocacion" class="form-control" required>
-                        <?php 
-                            if(isset($id))
-                                echo $funciones->getComboTipoPermiso($datos['tipo_colocacion']);
-                            else
-                                echo $funciones->getComboTipoPermiso(1);
-                        ?>
                         </select>
                     </div>
                 </div>
