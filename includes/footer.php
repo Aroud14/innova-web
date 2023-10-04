@@ -6,7 +6,10 @@
         <div class="section-60">
             <div class="shell">
                 <div class="range range-50 range-lg-justify range-xs-center">
-                    <div class="cell-md-3 cell-lg-3"><a class="reveal-inline-block" href="index.html"><img src="images/logo-default-2-144x122-1.png" alt="" srcset="images/logo-default-2-144x122-1.png"></a>
+                    <div class="cell-md-3 cell-lg-3">
+                        <a class="reveal-inline-block" href="index.html">
+                            <img src="<?php echo $datosEmpresa["logo2"] != "" ? 'admin/archivos/configuracion/imagenes/'.$datosEmpresa["logo2"] : 'admin/archivos/configuracion/imagenes/'.$datosEmpresa["logo"]; ?>" alt="" srcset="Logo footer">
+                        </a>
                         <div class="offset-top-30 text-center">
                             <ul class="list-inline list-inline-xs list-inline-madison">
                                 <li><a class="icon novi-icon icon-xxs fa-facebook icon-circle icon-gray-light-filled" href="#"></a></li>

@@ -8,7 +8,7 @@
             <div class="rd-navbar-inner">
                 <div class="rd-navbar-panel">
                     <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar, .rd-navbar-nav-wrap"><span></span></button>
-                    <h4 class="panel-title">Patshala</h4>
+                    <h4 class="panel-title"><?= $datosEmpresa["nombre_empresa"] ?? "" ?></h4>
                         <button class="rd-navbar-top-panel-toggle" data-rd-navbar-toggle=".rd-navbar-top-panel"><span></span>
                     </button>
                     <div class="rd-navbar-top-panel">
@@ -19,21 +19,25 @@
                                         <div class="unit-left"><span class="icon novi-icon mdi mdi-phone text-middle"></span></div>
                                         <div class="unit-body">
                                             <?php 
-                                                echo $datos['nombre'] == "" ? "" : "";
+                                                echo $datosEmpresa['telefono'] != '' ? '<a class="reveal-block" href="tel:'.$datosEmpresa['telefono'].'">Tel: '.$datosEmpresa['telefono'].',</a>' : '';
+
+                                                echo $datosEmpresa['whatsapp'] != '' ? '<a href="https://api.whatsapp.com/send?phone='.$datosEmpresa['whatsapp'].'&text=Hola,%20¿Me%20podria%20dar%20mas%20imformación?">Whats: '.$datosEmpresa['whatsapp'].',</a>' : '';
                                             ?>
-                                            <a class="reveal-block" href="tel:#">1-800-1234-567,</a>
-                                            <a href="tel:#">1-800-6547-321</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="cell-md-3 text-center">
-                                    <div class="rd-navbar-brand"><a class="reveal-inline-block" href="index.html"><img src="images/logo-default-2-144x122-1.png" alt="" width="191" height="80"></a></div>
+                                    <div class="rd-navbar-brand">
+                                        <a class="reveal-inline-block" href="index.php">
+                                            <img src="<?= 'admin/archivos/configuracion/imagenes/'.$datosEmpresa["logo"] ?>" alt="" width="191" height="80">
+                                        </a>
+                                    </div>
                                 </div>
                                 <div class="cell-md-3">
                                     <div class="inset-md-left-50">
                                         <div class="unit unit-horizontal unit-top unit-spacing-xs text-left">
                                             <div class="unit-left"><span class="icon novi-icon mdi mdi-map-marker text-middle"></span></div>
-                                            <div class="unit-body"><a href="#">2130 Fulton Street San Diego, CA 94117-1080 USA</a></div>
+                                            <div class="unit-body"><?= $datosEmpresa['direccion'] ?? "" ?></div>
                                         </div>
                                     </div>
                                 </div>
@@ -45,7 +49,11 @@
                     <div class="rd-navbar-nav-wrap">
                         <div class="rd-navbar-mobile-scroll">
                             <div class="rd-navbar-mobile-header-wrap">
-                                <div class="rd-navbar-mobile-brand"><a href="index.html"><img src="images/logo-default-2-144x122-1.png" alt="" srcset="images/logo-default-2-144x122-1.png 2x"></a></div>
+                                <div class="rd-navbar-mobile-brand">
+                                    <a href="index.php">
+                                        <img src="<?= 'admin/archivos/configuracion/imagenes/'.$datosEmpresa["logo"] ?>" alt="" srcset="Logo principal">
+                                    </a>
+                                </div>
                             </div>
                             <ul class="rd-navbar-nav">
                                 <li><a href="index.html">Home</a></li>
@@ -84,19 +92,7 @@
                                 </li>
                                 <li><a href="contacts.html">Contacts</a></li>
                             </ul>
-                            <div class="rd-navbar-search-mobile" id="rd-navbar-search-mobile">
-                                <form class="rd-navbar-search-form search-form-icon-right rd-search" action="search-results.html" method="GET">
-                                    <div class="form-group"><label class="form-label" for="rd-navbar-mobile-search-form-control">Search...</label><input class="rd-navbar-search-form-control form-control form-control-gray-lightest" id="rd-navbar-mobile-search-form-control" type="text" name="s" autocomplete="off"></div><button class="icon fa-search rd-navbar-search-button" type="submit"></button>
-                                </form>
-                            </div>
                         </div>
-                    </div>
-                    <div class="rd-navbar-search"><a class="rd-navbar-search-toggle mdi" data-rd-navbar-toggle=".rd-navbar-search" href="#"><span></span></a>
-                        <form class="rd-navbar-search-form search-form-icon-right rd-search" action="search-results.html" data-search-live="rd-search-results-live" method="GET">
-                            <div class="form-group"><label class="form-label" for="rd-navbar-search-form-control">Search</label><input class="rd-navbar-search-form-control form-control form-control-gray-lightest" id="rd-navbar-search-form-control" type="text" name="s" autocomplete="off">
-                                <div class="rd-search-results-live" id="rd-search-results-live"></div>
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>
