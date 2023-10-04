@@ -9,6 +9,12 @@ class Querys {
 		$strQuery = "SELECT * FROM tbl_slider WHERE fecha_eliminado IS NULL AND estatus = 1 ORDER BY orden ASC";
 		return $strQuery;
 	}
+
+	
+	function geConteotSliders(){
+		$strQuery = 'SELECT count(*) FROM tbl_slider WHERE fecha_eliminado IS NULL AND estatus = 1';
+		return $strQuery;
+	}
 	//---------------------------FIN SLIDERS-------------------------------
 
 	//---------------------------INICIO DATOS DE LA EMPRESA-----------------------------  
@@ -17,5 +23,30 @@ class Querys {
 		return $strQuery;
 	}
 	//---------------------------FIN DATOS DE LA EMPRESA-------------------------------
+
+	//---------------------------INICIO CATEGORIAS DE SERVICIOS-----------------------------  
+	function getCategoriaServicio(){
+		$strQuery = "SELECT * FROM tblc_categoria_servicio WHERE fecha_eliminado IS NULL AND estatus = 1 ORDER BY fecha_registro DESC LIMIT 5";
+		return $strQuery;
+	}
+
+	function getCategoriaServicio2(){
+		$strQuery = "SELECT * FROM tblc_categoria_servicio WHERE fecha_eliminado IS NULL AND estatus = 1 ORDER BY RAND() LIMIT 5";
+		return $strQuery;
+	}
+
+	function geConteotCategoriaServicio(){
+		$strQuery = 'SELECT count(*) FROM tblc_categoria_servicio WHERE fecha_eliminado IS NULL AND estatus = 1';
+		return $strQuery;
+	}
+	//---------------------------FIN CATEGORIAS DE SERVICIOS-------------------------------
+
+	//---------------------------INICIO SERVICIOS-----------------------------  
+	function getConteoServicio($id){
+		$strQuery = "SELECT count(*) FROM tbl_servicio WHERE fecha_eliminado IS NULL AND estatus = 1 AND id_categoria_servicio =".$id;
+		return $strQuery;
+	}
+
+	//---------------------------FIN SERVICIOS-------------------------------
 }
 ?>
