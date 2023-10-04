@@ -48,5 +48,17 @@ class Querys {
 	}
 
 	//---------------------------FIN SERVICIOS-------------------------------
+
+	//---------------------------INICIO BLOG-----------------------------  
+	function getBlog(){
+		$strQuery = "SELECT * FROM tbl_blog WHERE fecha_eliminado IS NULL AND estatus = 1 ORDER BY RAND() LIMIT 3";
+		return $strQuery;
+	}
+
+	function geConteotBlog(){
+		$strQuery = 'SELECT count(*) FROM tbl_blog WHERE fecha_eliminado IS NULL AND estatus = 1';
+		return $strQuery;
+	}
+	//---------------------------FIN BLOG-------------------------------
 }
 ?>
