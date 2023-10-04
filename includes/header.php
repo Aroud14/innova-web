@@ -84,18 +84,8 @@
                                         <li><a href="team-member-profile.html">Team Member Profile</a></li>
                                     </ul>
                                 </li>
-<<<<<<< HEAD
                                 <li><a href="blog.php">Blog</a></li>
-                                <li><a href="contacts.html">Contacts</a></li>
-=======
-                                <li class="rd-navbar--has-dropdown rd-navbar-submenu"><a href="blog.php">Blog</a>
-                                    <ul class="rd-navbar-dropdown rd-navbar-open-right">
-                                        <li><a href="grid-news.html">Grid News</a></li>
-                                        <li><a href="news-post-page.html">News Post Page</a></li>
-                                    </ul>
-                                </li>
                                 <li><a href="contactanos.php">Contactanos</a></li>
->>>>>>> 6e8c123b2010c8ce2c21c6838c7c26b4f8eaa380
                             </ul>
                         </div>
                     </div>
