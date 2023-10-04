@@ -1,9 +1,9 @@
 <?php
-include_once 'php/querys/blog.php';
+require_once 'querys/blog.php';
 
 class Querys {
 	use Blog;
-	
+
 	//---------------------------INICIO SLIDERS-----------------------------  
 	function getSliders(){
 		$strQuery = "SELECT * FROM tbl_slider WHERE fecha_eliminado IS NULL AND estatus = 1 ORDER BY orden ASC";

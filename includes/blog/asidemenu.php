@@ -52,6 +52,7 @@
             <div class="text-subline"></div>
             <div class="offset-top-20">
                 <ul class="list list-marked list-marked-primary">
+                    
                     <li><a href="#">News</a></li>
                     <li><a href="#">University</a></li>
                     <li><a href="#">Global Education</a></li>
