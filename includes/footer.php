@@ -7,15 +7,35 @@
             <div class="shell">
                 <div class="range range-50 range-lg-justify range-xs-center">
                     <div class="cell-md-3 cell-lg-3">
-                        <a class="reveal-inline-block" href="index.html">
-                            <img src="<?php echo $datosEmpresa["logo2"] != "" ? 'admin/archivos/configuracion/imagenes/'.$datosEmpresa["logo2"] : 'admin/archivos/configuracion/imagenes/'.$datosEmpresa["logo"]; ?>" alt="" srcset="Logo footer">
+                        <a class="reveal-inline-block" href="index.php" style="width: 100%; height: 120px; overflow: hidden;">
+                            <?php
+                                if($datosEmpresa["logo2"] != "")
+                                {
+                                    echo '<img src="admin/archivos/configuracion/imagenes/'.$datosEmpresa["logo2"].'" alt="" srcset="Logo footer" style="max-width: 100%; height: auto;">';
+                                }
+                                else
+                                {
+                                    echo '<img src="admin/archivos/configuracion/imagenes/'.$datosEmpresa["logo"].'" alt="" srcset="Logo footer" style="max-width: 100%; height: auto;">';
+                                }
+                            ?>
                         </a>
                         <div class="offset-top-30 text-center">
+                            <?php
+                                if($datosEmpresa["instagram"] != "" && $datosEmpresa["facebook"] != "" && $datosEmpresa["whatsapp"] != "" && $datosEmpresa["telefono"] != "" && $datosEmpresa["correo"] != "")
+                                {
+                                }
+                            ?>
+
                             <ul class="list-inline list-inline-xs list-inline-madison">
-                                <li><a class="icon novi-icon icon-xxs fa-facebook icon-circle icon-gray-light-filled" href="#"></a></li>
-                                <li><a class="icon novi-icon icon-xxs fa-twitter icon-circle icon-gray-light-filled" href="#"></a></li>
-                                <li><a class="icon novi-icon icon-xxs fa-google icon-circle icon-gray-light-filled" href="#"></a></li>
-                                <li><a class="icon novi-icon icon-xxs fa-instagram icon-circle icon-gray-light-filled" href="#"></a></li>
+                                <?= $datosEmpresa["instagram"] != "" ? '<li><a class="icon novi-icon icon-xxs fa-instagram icon-circle icon-gray-light-filled" target="_blank" href="'.$datosEmpresa["instagram"].'"></a></li>' : ''  ?>
+
+                                <?= $datosEmpresa["facebook"] != "" ? '<li><a class="icon novi-icon icon-xxs fa-facebook icon-circle icon-gray-light-filled" target="_blank" href="'.$datosEmpresa["facebook"].'"></a></li>' : ''  ?>
+
+                                <?= $datosEmpresa["whatsapp"] != "" ? '<li><a class="icon novi-icon icon-xxs fa-whatsapp icon-circle icon-gray-light-filled" target="_blank" href="https://api.whatsapp.com/send?phone='.$datosEmpresa['whatsapp'].'&text=Hola,%20¿Me%20podria%20dar%20mas%20imformación?"></a></li>' : ''  ?>
+                                
+                                <?= $datosEmpresa["correo"] != "" ? '<li><a class="icon novi-icon icon-xxs fa-send icon-circle icon-gray-light-filled" target="_blank" href="mailto:'.$datosEmpresa["correo"].'"></a></li>' : ''  ?>
+                                
+                                <?= $datosEmpresa["telefono"] != "" ? '<li><a class="icon novi-icon icon-xxs fa-phone icon-circle icon-gray-light-filled" target="_blank" href="tel:'.$datosEmpresa["telefono"].'"></a></li>' : ''  ?>
                             </ul>
                         </div>
                     </div>
@@ -24,24 +44,61 @@
                         <div class="text-subline"></div>
                         <div class="offset-top-30">
                             <ul class="list-unstyled contact-info list">
-                                <li>
-                                    <div class="unit unit-horizontal unit-middle unit-spacing-xs">
-                                        <div class="unit-left"><span class="icon novi-icon mdi mdi-phone text-middle icon-xs text-madison"></span></div>
-                                        <div class="unit-body"><a class="text-dark" href="tel:#">1-800-1234-567,</a><a class="reveal-block reveal-md-inline-block text-dark" href="tel:#">1-800-6547-321</a></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="unit unit-horizontal unit-middle unit-spacing-xs">
-                                        <div class="unit-left"><span class="icon novi-icon mdi mdi-map-marker text-middle icon-xs text-madison"></span></div>
-                                        <div class="unit-body text-left"><a class="text-dark" href="#">2130 Fulton Street San Diego, CA 94117-1080 USA</a></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="unit unit-horizontal unit-middle unit-spacing-xs">
-                                        <div class="unit-left"><span class="icon novi-icon mdi mdi-email-open text-middle icon-xs text-madison"></span></div>
-                                        <div class="unit-body"><a href="mailto:#">info@demolink.org</a></div>
-                                    </div>
-                                </li>
+                                <?php
+                                    if($datosEmpresa["telefono"] != "")
+                                    {
+                                        ?>
+                                            <li>
+                                                <div class="unit unit-horizontal unit-middle unit-spacing-xs">
+                                                    <div class="unit-left"><span class="icon novi-icon mdi mdi-phone text-middle icon-xs text-madison"></span></div>
+                                                    <div class="unit-body">
+                                                        <a class="text-dark" href="tel:<?= $datosEmpresa["telefono"] ?>"><?= $datosEmpresa["telefono"] ?></a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        <?php
+                                    }
+
+                                    if($datosEmpresa["whatsapp"] != "")
+                                    {
+                                        ?>
+                                            <li>
+                                                <div class="unit unit-horizontal unit-middle unit-spacing-xs">
+                                                    <div class="unit-left"><span class="icon novi-icon mdi mdi-whatsapp text-middle icon-xs text-madison"></span></div>
+                                                    <div class="unit-body">
+                                                        <a class="text-dark" href="https://api.whatsapp.com/send?phone=<?= $datosEmpresa['whatsapp'] ?>&text=Hola,%20¿Me%20podria%20dar%20mas%20imformación?">
+                                                            <?= $datosEmpresa["whatsapp"] ?>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        <?php
+                                    }
+
+                                    if($datosEmpresa["direccion"] != "")
+                                    {
+                                        ?>
+                                            <li>
+                                                <div class="unit unit-horizontal unit-middle unit-spacing-xs">
+                                                    <div class="unit-left"><span class="icon novi-icon mdi mdi-map-marker text-middle icon-xs text-madison"></span></div>
+                                                    <div class="unit-body text-left"><?= $datosEmpresa["direccion"] ?></div>
+                                                </div>
+                                            </li>
+                                        <?php
+                                    }
+
+                                    if($datosEmpresa["correo"] != "")
+                                    {
+                                        ?>
+                                            <li>
+                                                <div class="unit unit-horizontal unit-middle unit-spacing-xs">
+                                                    <div class="unit-left"><span class="icon novi-icon mdi mdi-email-open text-middle icon-xs text-madison"></span></div>
+                                                    <div class="unit-body"><a href="mailto:<?= $datosEmpresa["correo"] ?>"><?= $datosEmpresa["correo"] ?></a></div>
+                                                </div>
+                                            </li>
+                                        <?php
+                                    }
+                                ?>
                             </ul>
                         </div>
                     </div>
