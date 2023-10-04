@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,400italic,600,700%7CMerriweather:400,300,300italic,400italic,700,700italic">
     <link rel="stylesheet" href="<?=$host?>/css/style.css">
     <link rel="stylesheet" href="<?=$host?>/css/novi.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.all.min.js"></script>
 </head>
 
 <body>
