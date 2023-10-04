@@ -52,10 +52,6 @@
         </div>
     </section>
 
-    
-
-
-
 <?php include("includes/footer.php"); ?>
 
 <?php include("includes/plantilla_fin.php"); ?>

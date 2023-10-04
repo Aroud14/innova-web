@@ -1,12 +1,19 @@
 <div class="cell-xs-8 cell-md-4 text-left">
     <aside class="aside inset-md-left-30">
         <div class="aside-item">
-            <h6 class="text-bold">Search</h6>
+            <h6 class="text-bold">Buscar por titulo</h6>
             <div class="text-subline"></div>
             <div class="offset-top-30">
-                <form class="form-search rd-search form-search-widget" action="search-results.html" method="GET">
+                <form class="form-search rd-search form-search-widget" id="busqueda">
                     <div class="form-group">
-                        <div class="input-group"><input class="form-search-input  form-control" type="text" name="s" autocomplete="off"><span class="input-group-btn"><button class="btn btn-primary" type="submit"><span class="icon fa-search"></span></button></span></div>
+                        <div class="input-group">
+                            <input class="form-search-input  form-control" type="text" id="titulo" name="titulo" autocomplete="off">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="submit">
+                                    <span class="icon fa-search"></span>
+                                </button>
+                            </span>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -51,15 +58,53 @@
             <h6 class="text-bold">Categorías</h6>
             <div class="text-subline"></div>
             <div class="offset-top-20">
-                <ul class="list list-marked list-marked-primary">
-                    
-                    <li><a href="#">News</a></li>
-                    <li><a href="#">University</a></li>
-                    <li><a href="#">Global Education</a></li>
-                    <li><a href="#">Law</a></li>
-                    <li><a href="#">Colleges</a></li>
+                <ul class="list list-marked list-marked-primary" id="filtro-categorias">
+                    <?php
+                        $categorias = $conexion->obtenerlista($querys->getlistacategorias());
+                    ?>
+                    <?php foreach($categorias as $categoria): ?>                    
+                        <li data-id="<?= $categoria->id_categoria_blog?>"><a href="#"><?=$categoria->nombre?></a></li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
         </div>
     </aside>
 </div>
+
+<script>
+    window.onload = () => {
+        $('#filtro-categorias > li').on('click', function(){
+            let id_categoria = $(this).data('id');
+            blogs({ id_categoria }, {
+                success: () => {
+
+                }
+            })
+            
+        });
+        
+        $("#busqueda").submit(e => {
+            e.preventDefault();
+            let titulo = $("#busqueda").find('#titulo').val();
+
+            blogs({ titulo }, {
+                success: () => {
+
+                }
+            })
+        });
+
+        const blogs = (filters, { success = () => true }) => {
+            $.ajax({
+                type: "POST",
+                url: 'includes/blog/blogs.php',
+                data: filters,
+                success: (html) => {
+                    let contenedor = $('#blog').find('#contenedor');
+                    contenedor.html(html);
+                    success();
+                }
+            });
+        }
+    }
+</script>

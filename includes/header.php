@@ -56,8 +56,8 @@
                                 </div>
                             </div>
                             <ul class="rd-navbar-nav">
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="about-us.html">About</a>
+                                <li><a href="index.php">Inicio</a></li>
+                                <li><a href="about-us.html">Nosotros</a>
                                     <ul class="rd-navbar-dropdown">
                                         <li><a href="history.html">History</a></li>
                                     </ul>
@@ -84,8 +84,8 @@
                                         <li><a href="team-member-profile.html">Team Member Profile</a></li>
                                     </ul>
                                 </li>
-                                <li class="rd-navbar--has-dropdown rd-navbar-submenu"><a href="#">News</a>
-                                    <ul class="rd-navbar-dropdown rd-navbar-open-right" style="">
+                                <li class="rd-navbar--has-dropdown rd-navbar-submenu"><a href="blog.php">Blog</a>
+                                    <ul class="rd-navbar-dropdown rd-navbar-open-right">
                                         <li><a href="grid-news.html">Grid News</a></li>
                                         <li><a href="news-post-page.html">News Post Page</a></li>
                                     </ul>
