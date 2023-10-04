@@ -38,7 +38,7 @@ class upload {
 
 		// verificar si no es un tipo de archivo no deseado
         if (in_array($this->typetxt, $this->blocked)) {
-            $this->msg_eror = "Archivo no Permitido - ".$this->fileexte;
+            $this->msg_eror = "Archivo no Permitido - ".$this->typetxt;
             $this->isupload = false;
             return false;
             }

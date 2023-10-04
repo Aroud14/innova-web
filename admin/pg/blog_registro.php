@@ -91,10 +91,10 @@ if ($_POST['id'] > 0) {
                                         </select>
                                     </div>
                                 </div>
-                    <div class="col-md-12 env_editor">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label class="form-label" for="text1">Contenido</label>
-                            <textarea name="text1" id="text1"><?php if(isset($id)) echo htmlspecialchars($blog['contenido']);?></textarea>
+                            <textarea name="text1" id="text1" class="env_editor"><?php if(isset($id)) echo htmlspecialchars($blog['contenido']);?></textarea>
                         </div>
                     </div>
 

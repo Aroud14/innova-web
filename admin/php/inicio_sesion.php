@@ -90,6 +90,11 @@
 			'tiene_horario' => $dato["tiene_horario"],
 			'tipo' => $dato["tipo"],
 		);
+		
+		$config = $conexion->fetch_array($querys->getConfiguracion());
+
+		$_SESSION['IsAuthorized'] = true;
+		$_SESSION['dominio'] = $config['host'];
 
 		//OPCIÓN PARA DIRECCIONAR A LA PÁGINA DE INICIO TRAS LOGUEO EXITOSO
 		echo '<script languaje="javascript">

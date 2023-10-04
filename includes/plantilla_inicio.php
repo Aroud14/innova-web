@@ -11,10 +11,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="keywords" content="intense web design multipurpose template">
     <meta name="date" content="Dec 26">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<?= $host ?>/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,400italic,600,700%7CMerriweather:400,300,300italic,400italic,700,700italic">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/novi.css">
+    <link rel="stylesheet" href="<?=$host?>/css/style.css">
+    <link rel="stylesheet" href="<?=$host?>/css/novi.css">
 </head>
 
 <body>

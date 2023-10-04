@@ -1,0 +1,12 @@
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
+#Header always set Content-Security-Policy "upgrade-insecure-requests;"
+
+
+RewriteRule ^blog-detalles/(.*)$  page_blog_details.php?id=$1
+RewriteRule ^project-details/(.*)$  page_project_details.php?id=$1
+RewriteRule ^service-details/(.*)$  page_service_details.php?id=$1
+
+RewriteRule ^condiciones$  terminos_condiciones.php
+RewriteRule ^aviso-privacidad$  aviso_privacidad.php

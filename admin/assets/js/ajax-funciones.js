@@ -227,6 +227,7 @@ function registro_configuracion(id = 1){
         success: function(data){            
             $("#contenido").html(data);
             $("#contenido").trigger('create');
+
             activarTooltipAjax()
             enviar_formulario();
         }
@@ -328,9 +329,8 @@ function registro_blog(id = '-1'){
         data:    params,
         success: function(data){
             $("#contenido").html(data);
-            CKEDITOR.replace('text1', {
-                customConfig: 'configuracion.js'
-            });
+            
+            useCkeditor5();
             enviar_formulario();
         }
     });

@@ -26,26 +26,29 @@
                         <?php
                             $blogs = $conexion->obtenerlista($querys->getlistablogs());
                         ?>
-
-                        <?php foreach ($blogs as $i => $blog) : ?>
-                            <div class="cell-sm-6">
-                                <article class="post-news">
-                                    <a href="news-post-page.html">
-                                        <img class="img-responsive" src="<?= "admin/archivos/$blog->portada_imagen" ?>" width="370" height="240" alt="">
-                                    </a>
-                                    <div class="post-news-body">
-                                        <h6><a href="news-post-page.html"><?= $blog->titulo ?></a></h6>
-                                        <div class="offset-top-20">
-                                            <p><?= $blog->contenido ?></p>
-                                        </div>
-                                        <div class="post-news-meta offset-top-20">
-                                            <span class="icon novi-icon icon-xs mdi mdi-calendar-clock text-middle text-madison"></span>
-                                            <span class="text-middle inset-left-10 text-italic text-black"> <?= $blog->fecha_registro ?> </span>
-                                        </div>
+                        <?php
+                            if(count($blogs) == 0): ?>
+                                <?php require_once 'includes/blog/0-results.php'; ?>
+                            <?php else: ?>
+                                <?php foreach ($blogs as $i => $blog) : ?>
+                                    <div class="cell-sm-6">
+                                        <article class="post-news">
+                                            <a href="blog-detalles/<?=$blog->enlace?>">
+                                                <img class="img-responsive" src="<?= "admin/archivos/$blog->portada_imagen" ?>" width="370" height="240" alt="">
+                                            </a>
+                                            <div class="post-news-body">
+                                                <h6><a href="blog-detalles/<?=$blog->enlace?>"><?= $blog->titulo ?></a></h6>
+                                                
+                                                <div class="post-news-meta offset-top-20">
+                                                    <span class="icon novi-icon icon-xs mdi mdi-calendar-clock text-middle text-madison"></span>
+                                                    <span class="text-middle inset-left-10 text-italic text-black"> <?= $blog->fecha_registro ?> </span>
+                                                </div>
+                                            </div>
+                                        </article>
                                     </div>
-                                </article>
-                            </div>
-                        <?php endforeach; ?>
+                                <?php endforeach; ?>
+                            <?php endif;
+                        ?>
                     </div>
                 </div>
                 <?php include_once 'includes/blog/asidemenu.php' ?>
@@ -54,5 +57,8 @@
     </section>
 </main>
 
+<script>
+    
+</script>
 <?php include("includes/footer.php"); ?>
 <?php include("includes/plantilla_fin.php"); ?>

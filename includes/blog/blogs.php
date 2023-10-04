@@ -9,20 +9,28 @@
 	$funciones = new Funciones();
 	$querys    = new Querys();
 
-    $id_categoria   = $funciones->limpia($_POST['id_categoria'] ?? 0);
-    $titulo         = $funciones->limpia($_POST['titulo']       ?? '');
-    $fecha_creacion = $funciones->limpia($_POST['creacion']     ?? '');
-    $blogs          = $conexion->obtenerlista($querys->getlistablogs($id_categoria, $titulo, $fecha_creacion));
+    $id_categoria  = $funciones->limpia($_POST['id_categoria']  ?? 0);
+    $titulo        = $funciones->limpia($_POST['titulo']        ?? '');
+    $anio_creacion = $funciones->limpia($_POST['anio_creacion'] ?? '');
+
+    $blogs         = $conexion->obtenerlista($querys->getlistablogs($id_categoria, $titulo, $anio_creacion));
+?>
+
+<?php
+if(count($blogs) == 0):
+    require_once '0-results.php';
+    exit;
+endif;
 ?>
 
 <?php foreach ($blogs as $i => $blog) : ?>
     <div class="cell-sm-6">
         <article class="post-news">
-            <a href="news-post-page.html">
+            <a href="blog-detalles/<?=$blog->id_blog?>">
                 <img class="img-responsive" src="<?= "admin/archivos/$blog->portada_imagen" ?>" width="370" height="240" alt="">
             </a>
             <div class="post-news-body">
-                <h6><a href="news-post-page.html"><?= $blog->titulo ?></a></h6>
+                <h6><a href="blog-detalles/<?=$blog->id_blog?>"><?= $blog->titulo ?></a></h6>
                 
                 <div class="post-news-meta offset-top-20">
                     <span class="icon novi-icon icon-xs mdi mdi-calendar-clock text-middle text-madison"></span>

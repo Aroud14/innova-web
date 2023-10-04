@@ -8,4 +8,6 @@
 	$conexion  = new DB_MySql(1);
 	$funciones = new Funciones();
 	$querys    = new Querys();
+
+	$host = 'http://localhost/innova-web';
 ?>
